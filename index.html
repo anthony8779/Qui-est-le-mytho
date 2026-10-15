@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#11101c">
+<meta name="description" content="Qui est le mytho ? Le jeu de bluff à partager entre amis.">
+<title>Qui est le mytho ?</title>
+<style>
+:root{color-scheme:dark;--bg:#11101c;--panel:#1c1a2b;--panel2:#252239;--line:#39354f;--text:#f8f6ff;--muted:#b4b0ca;--pink:#ff559d;--cyan:#5be7d2;--yellow:#ffd166;--red:#ff7b86;--radius:22px}
+*{box-sizing:border-box}html{min-height:100%;background:var(--bg)}body{margin:0;min-height:100vh;color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(ellipse at 50% -10%,#40305f 0,transparent 54%),var(--bg);padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom)}
+button,input,textarea{font:inherit}button{cursor:pointer;touch-action:manipulation}
+.app{width:min(760px,100%);margin:0 auto;padding:20px 0 28px}.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:22px}.brand{font-size:.82rem;font-weight:900;letter-spacing:.16em;color:var(--muted)}.brand b{color:var(--pink)}.version{font-size:.75rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 9px}
+.hero{text-align:center;margin:18px 0 25px}.eyebrow{font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);font-size:.76rem}.logo{font-weight:1000;letter-spacing:-.065em;line-height:.96;font-size:clamp(2.5rem,10vw,5rem);margin:10px 0}.logo span{display:block;color:var(--pink);text-shadow:0 7px 32px #ff559d35}.subtitle{color:var(--muted);margin:12px auto 0;max-width:460px;line-height:1.5}
+.panel{background:linear-gradient(150deg,#211f33f5,#191725f5);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(17px,4vw,26px);box-shadow:0 18px 50px #0002;margin:14px 0}
+h1,h2,h3,p{margin-top:0}h2{font-size:1.3rem;margin-bottom:8px;letter-spacing:-.02em}p{line-height:1.55}.muted{color:var(--muted)}.small{font-size:.88rem}.field-label{display:block;font-weight:800;margin:17px 0 8px}
+textarea,input{width:100%;border:1px solid #48435f;background:#11101c;color:var(--text);border-radius:14px;padding:13px 14px;outline:none}textarea:focus,input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #5be7d21a}textarea{resize:vertical;min-height:112px}
+.btn{border:0;border-radius:14px;padding:14px 16px;font-weight:900;min-height:48px;transition:transform .12s,filter .12s}.btn:active{transform:scale(.985)}.btn:disabled{opacity:.4;cursor:not-allowed}.primary{width:100%;background:linear-gradient(100deg,var(--pink),#ff78a7);color:#210d19;box-shadow:0 8px 25px #ff559d20}.secondary{background:#302c46;color:var(--text);border:1px solid #49435f}.outline{background:transparent;border:1px solid var(--line);color:var(--text)}.btn-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.btn-row .btn{flex:1}.hidden{display:none!important}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}.step{border:1px solid var(--line);background:#171624;border-radius:13px;padding:11px 8px;text-align:center}.step b{display:block;font-size:.83rem}.step span{font-size:.75rem;color:var(--muted)}
+.note{padding:12px 14px;background:#151421;border:1px solid var(--line);border-radius:13px;color:var(--muted);font-size:.86rem;line-height:1.5;margin-top:14px}
+.count{font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.symbol{width:58px;height:58px;border-radius:18px;background:#302740;display:grid;place-items:center;font-size:1.7rem;margin-bottom:15px}.secret-card{text-align:center;border:1px solid var(--line);border-radius:18px;padding:24px 16px;background:radial-gradient(circle at 50% 0,#3a2a4b,#151421 70%);margin:17px 0}.role{font-size:clamp(1.7rem,7vw,2.6rem);font-weight:1000;letter-spacing:-.04em;margin:12px 0}.role.liar{color:var(--pink)}.role.innocent{color:var(--cyan)}.prompt{font-size:1.08rem;font-weight:800;line-height:1.4;margin:12px 0 0}.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.chip{border-radius:999px;padding:8px 12px;background:#2b2740;border:1px solid #48415f;font-size:.9rem}.choice{width:100%;text-align:left;background:#26233a;color:var(--text);border:1px solid #46405d;margin:5px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}.choice.selected{border-color:var(--pink);background:#45253d}.choice small{color:var(--muted)}.result-mark{font-size:3.2rem}.winner{font-size:clamp(1.8rem,7vw,3rem);font-weight:1000;color:var(--pink);overflow-wrap:anywhere}.footer{text-align:center;color:#8e89a8;font-size:.78rem;line-height:1.5;padding:18px 8px}.toast{color:var(--yellow);min-height:1.2em;font-size:.9rem;margin-top:8px}
+@media(min-width:600px){body{padding-left:24px;padding-right:24px}.panel{padding:28px}.hero{margin-top:28px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top"><div class="brand">MYTHO<b> CLUB</b></div><div class="version">PROTO 0.2</div></div>
+  <header class="hero" id="hero">
+    <div class="eyebrow">Le jeu de bluff entre amis</div>
+    <div class="logo">QUI EST LE <span>MYTHO ?</span></div>
+    <p class="subtitle">Une question. Des réponses suspectes. Un seul mytho à démasquer.</p>
+  </header>
+
+  <section id="setup" class="panel">
+    <h2>Prépare la partie</h2>
+    <p class="muted">Entrez les pseudos, passez l'appareil à chacun pour découvrir son rôle, puis débattez et votez.</p>
+    <label class="field-label" for="names">Joueurs — un pseudo par ligne</label>
+    <textarea id="names" maxlength="300" autocomplete="off" autocapitalize="words">Alex
+Sarah
+Mehdi
+Lola</textarea>
+    <div class="small muted" id="nameCount">4 joueurs saisis</div>
+    <button class="btn primary" id="start">Lancer la partie <span aria-hidden="true">→</span></button>
+    <div class="steps">
+      <div class="step"><b>01 · Secret</b><span>Découvre ton rôle</span></div>
+      <div class="step"><b>02 · Bluff</b><span>Réponds et débattez</span></div>
+      <div class="step"><b>03 · Vote</b><span>Démasquez le mytho</span></div>
+    </div>
+    <div class="note">Pour 3 à 8 joueurs. Prototype local : tout le monde joue sur le même appareil. Ne regardez pas l'écran des autres pendant la distribution des rôles.</div>
+    <div id="setupError" class="toast" role="status"></div>
+  </section>
+
+  <section id="pass" class="panel hidden">
+    <div class="count" id="passCount"></div><div class="symbol">📲</div>
+    <h2>Passe l'appareil</h2>
+    <p id="passText" class="muted"></p>
+    <button class="btn primary" id="reveal">Je suis prêt, afficher mon rôle</button>
+  </section>
+
+  <section id="secret" class="panel hidden">
+    <div class="count" id="secretCount"></div><div class="symbol" id="roleIcon">🕵️</div>
+    <h2>Ton rôle secret</h2>
+    <div class="secret-card">
+      <div id="roleText" class="role"></div>
+      <div class="muted small" id="promptLabel">Ta question secrète</div>
+      <div id="secretPrompt" class="prompt"></div>
+    </div>
+    <p id="secretHelp" class="muted"></p>
+    <button class="btn primary" id="hideSecret">J'ai mémorisé — cacher mon rôle</button>
+  </section>
+
+  <section id="discussion" class="panel hidden">
+    <div class="count">Manche en cours · Discussion</div><div class="symbol">💬</div>
+    <h2>À vous de parler</h2>
+    <p class="muted">Chacun répond à sa question sans trop en dire. Le mytho doit improviser et se fondre dans le groupe.</p>
+    <div class="secret-card"><div class="muted small">QUESTION DES JOUEURS</div><div class="prompt" id="question"></div></div>
+    <div class="note">Astuce : demandez à chacun d'expliquer sa réponse. Les détails peuvent trahir le mytho.</div>
+    <button class="btn primary" id="goVote">Tout le monde a répondu — voter →</button>
+  </section>
+
+  <section id="vote" class="panel hidden">
+    <div class="count">Dernière étape · Vote</div><div class="symbol">🗳️</div>
+    <h2>Qui est le mytho ?</h2><p class="muted">Mettez-vous d'accord et choisissez un seul suspect.</p>
+    <div id="voteOptions"></div>
+    <div id="voteError" class="toast" role="status"></div>
+    <button class="btn primary" id="confirmVote" disabled>Verrouiller le vote</button>
+    <button class="btn outline" id="backDiscussion" style="width:100%;margin-top:8px">Retour à la discussion</button>
+  </section>
+
+  <section id="result" class="panel hidden">
+    <div class="count">Fin de manche</div><div class="result-mark" id="resultMark">🎭</div>
+    <h2 id="resultHeading">Révélation !</h2>
+    <div class="secret-card"><div class="muted small">LE MYTHO ÉTAIT</div><div id="winnerName" class="winner"></div><p id="resultText"></p></div>
+    <h3>Les deux questions</h3>
+    <div class="note"><b>Les innocents :</b> <span id="revealQuestion"></span></div>
+    <div class="note"><b>Le mytho :</b> <span id="revealLiarQuestion"></span></div>
+    <button class="btn primary" id="again">Nouvelle manche ↻</button>
+    <button class="btn secondary" id="newGame" style="width:100%;margin-top:8px">Changer les joueurs</button>
+  </section>
+  <footer class="footer">QUI EST LE MYTHO ? · Prototype indépendant<br>Pas encore de salons en ligne ni de comptes joueurs.</footer>
+</div>
+<script>
+"use strict";
+const QUESTIONS = [
+{q:"Quel aliment pourrait-on manger tous les jours ?",l:"Quel aliment est le pire à manger tous les jours ?"},
+{q:"Quelle célébrité inviterais-tu à dîner ?",l:"Quelle célébrité éviterais-tu à dîner ?"},
+{q:"Quel est le meilleur endroit pour des vacances ?",l:"Quel est le pire endroit pour des vacances ?"},
+{q:"Quel super-pouvoir choisirais-tu ?",l:"Quel super-pouvoir serait le plus inutile ?"},
+{q:"Quel animal ferait le meilleur colocataire ?",l:"Quel animal ferait le pire colocataire ?"},
+{q:"Quel métier aimerais-tu tester pendant une journée ?",l:"Quel métier ne voudrais-tu jamais tester ?"},
+{q:"Quel objet emporterais-tu sur une île déserte ?",l:"Quel objet serait inutile sur une île déserte ?"},
+{q:"Quel film pourrais-tu revoir dix fois ?",l:"Quel film ne voudrais-tu plus jamais revoir ?"},
+{q:"Quelle chose est indispensable pour une soirée réussie ?",l:"Quelle chose peut ruiner une soirée ?"},
+{q:"Quel plat choisirais-tu pour ton dernier repas ?",l:"Quel plat refuserais-tu même gratuitement ?"},
+{q:"Quelle appli utilises-tu le plus ?",l:"Quelle appli pourrais-tu supprimer sans regret ?"},
+{q:"Quel personnage de fiction serait un bon ami ?",l:"Quel personnage de fiction serait insupportable comme ami ?"},
+{q:"Quelle chanson met l'ambiance ?",l:"Quelle chanson fait quitter la piste ?"},
+{q:"Quelle qualité est la plus importante chez un ami ?",l:"Quel défaut est le plus pénible chez un ami ?"},
+{q:"Quel objet du quotidien devrait être amélioré ?",l:"Quel objet du quotidien ne sert presque à rien ?"},
+{q:"Quelle matière scolaire est la plus utile ?",l:"Quelle matière scolaire est la plus difficile à supporter ?"},
+{q:"Quel serait le meilleur animal de compagnie ?",l:"Quel serait le pire animal de compagnie ?"},
+{q:"Quelle invention a changé le monde en mieux ?",l:"Quelle invention complique inutilement la vie ?"},
+{q:"Quelle est la meilleure excuse pour être en retard ?",l:"Quelle est l'excuse la moins crédible pour être en retard ?"},
+{q:"Quel talent aimerais-tu maîtriser instantanément ?",l:"Quel talent impressionne peu les gens ?"},
+{q:"Quel snack est parfait pour regarder un film ?",l:"Quel snack est une catastrophe au cinéma ?"},
+{q:"Quelle activité est parfaite un jour de pluie ?",l:"Quelle activité est insupportable un jour de pluie ?"},
+{q:"Quel objet sauverais-tu en premier dans un déménagement ?",l:"Quel objet serais-tu content de jeter en déménageant ?"},
+{q:"Quelle règle rendrait la vie plus facile ?",l:"Quelle règle faudrait-il supprimer ?"},
+{q:"Quelle chose est toujours meilleure entre amis ?",l:"Quelle chose est parfois pénible entre amis ?"}
+];
+const $ = id => document.getElementById(id);
+const sections = ["setup","pass","secret","discussion","vote","result"];
+let players=[], liarIndex=-1, question=null, turn=0, selected=-1;
+function show(id){sections.forEach(s=>$(s).classList.toggle("hidden",s!==id));window.scrollTo({top:0,behavior:"smooth"});}
+function getNames(){return $("names").value.split(/\r?\n/).map(n=>n.trim()).filter(Boolean);}
+function updateNameCount(){const count=getNames().length;$("nameCount").textContent=count+" joueur"+(count!==1?"s":"")+" saisi"+(count!==1?"s":"");}
+function startRound(){
+  const names=getNames().map(n=>n.slice(0,24));
+  const unique=[];const seen=new Set();
+  for(const name of names){const key=name.toLocaleLowerCase("fr");if(!seen.has(key)){seen.add(key);unique.push(name);}}
+  $("setupError").textContent="";
+  if(unique.length<3||unique.length>8){$("setupError").textContent="Il faut entre 3 et 8 pseudos différents.";return;}
+  players=unique;liarIndex=Math.floor(Math.random()*players.length);
+  question=QUESTIONS[Math.floor(Math.random()*QUESTIONS.length)];
+  turn=0;selected=-1;preparePass();show("pass");
+}
+function preparePass(){
+  $("passCount").textContent=`JOUEUR ${turn+1} / ${players.length}`;
+  $("passText").textContent=`Passe l'appareil à ${players[turn]}. Les autres doivent regarder ailleurs.`;
+}
+function revealRole(){
+  const liar=turn===liarIndex;
+  $("secretCount").textContent=`JOUEUR ${turn+1} / ${players.length} · ${players[turn]}`;
+  $("roleText").textContent=liar?"TU ES LE MYTHO":"TU ES INNOCENT";
+  $("roleText").className="role "+(liar?"liar":"innocent");
+  $("roleIcon").textContent=liar?"🎭":"🕵️";
+  $("secretPrompt").textContent=liar?question.l:question.q;
+  $("secretHelp").textContent=liar?"Invente une réponse crédible. Écoute les autres et essaie de comprendre leur vraie question.":"Réponds sincèrement à la question. Écoute les réponses pour repérer les incohérences.";
+  show("secret");
+}
+function hideRole(){
+  turn++;
+  if(turn<players.length){preparePass();show("pass");}
+  else{$("question").textContent=question.q;show("discussion");}
+}
+function buildVote(){
+  selected=-1;$("confirmVote").disabled=true;$("voteError").textContent="";
+  const box=$("voteOptions");box.replaceChildren();
+  players.forEach((name,i)=>{
+    const b=document.createElement("button");b.type="button";b.className="btn choice";
+    const label=document.createElement("span");label.textContent=name;
+    const hint=document.createElement("small");hint.textContent="Choisir";
+    b.append(label,hint);
+    b.addEventListener("click",()=>{
+      selected=i;
+      box.querySelectorAll("button").forEach(x=>{x.classList.remove("selected");x.lastElementChild.textContent="Choisir";});
+      b.classList.add("selected");hint.textContent="Sélectionné";$("confirmVote").disabled=false;
+    });
+    box.appendChild(b);
+  });
+  show("vote");
+}
+function revealResult(){
+  if(selected<0||selected>=players.length){$("voteError").textContent="Choisissez un joueur avant de voter.";return;}
+  const caught=selected===liarIndex;
+  $("resultMark").textContent=caught?"🎉":"😈";
+  $("resultHeading").textContent=caught?"Bien joué !":"Le mytho vous a eus !";
+  $("winnerName").textContent=players[liarIndex];
+  $("resultText").textContent=caught
+    ?`Votre groupe a choisi ${players[selected]}. Le mytho est démasqué !`
+    :`Vous avez choisi ${players[selected]}, mais le mytho a réussi à se fondre dans le groupe.`;
+  $("revealQuestion").textContent=question.q;
+  $("revealLiarQuestion").textContent=question.l;
+  show("result");
+}
+$("names").addEventListener("input",updateNameCount);
+$("start").addEventListener("click",startRound);
+$("reveal").addEventListener("click",revealRole);
+$("hideSecret").addEventListener("click",hideRole);
+$("goVote").addEventListener("click",buildVote);
+$("confirmVote").addEventListener("click",revealResult);
+$("backDiscussion").addEventListener("click",()=>show("discussion"));
+$("again").addEventListener("click",startRound);
+$("newGame").addEventListener("click",()=>show("setup"));
+updateNameCount();
+</script>
+</body>
+</html>
