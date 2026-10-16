@@ -2,6 +2,76 @@
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#11101c"><title>Qui est le mytho ?</title>
 <style>
 :root{color-scheme:dark;--bg:#11101c;--panel:#1c1a2b;--line:#39354f;--text:#f8f6ff;--muted:#b4b0ca;--pink:#ff559d;--cyan:#5be7d2;--yellow:#ffd166}*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);font-family:system-ui,-apple-system,sans-serif;color:var(--text);background:radial-gradient(ellipse at 50% -10%,#40305f 0,transparent 54%),var(--bg)}.app{width:min(700px,100%);margin:auto;padding:22px 0}.top{display:flex;justify-content:space-between;color:var(--muted);font-weight:900;letter-spacing:.1em;font-size:.8rem}.top b{color:var(--pink)}header{text-align:center;margin:30px 0}.eyebrow{color:var(--cyan);text-transform:uppercase;letter-spacing:.15em;font-weight:900;font-size:.75rem}.logo{font-weight:1000;letter-spacing:-.06em;line-height:.98;font-size:clamp(2.7rem,10vw,5rem);margin:12px 0}.logo span{display:block;color:var(--pink)}.muted{color:var(--muted)}.panel{background:linear-gradient(150deg,#211f33f5,#191725f5);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,28px);margin:14px 0}.hidden{display:none!important}h2{margin:0 0 8px}p{line-height:1.5}label{display:block;font-weight:800;margin:16px 0 7px}input{width:100%;border:1px solid #48435f;background:#11101c;color:var(--text);border-radius:13px;padding:14px;outline:none;font:inherit}input:focus,select:focus{border-color:var(--cyan)}select{width:100%;border:1px solid #48435f;background:#11101c;color:var(--text);border-radius:13px;padding:14px;outline:none;font:inherit}.btn{border:0;border-radius:13px;padding:14px 16px;font:inherit;font-weight:900;min-height:48px;cursor:pointer;touch-action:manipulation}.primary{background:linear-gradient(100deg,var(--pink),#ff78a7);color:#210d19;width:100%;margin-top:12px}.secondary{background:#302c46;color:var(--text);border:1px solid #49435f}.btn:disabled{opacity:.45;cursor:not-allowed}.row{display:flex;gap:9px;flex-wrap:wrap}.row>*{flex:1}.note{background:#151421;border:1px solid var(--line);border-radius:13px;padding:12px;margin-top:13px;color:var(--muted);font-size:.9rem;line-height:1.5}.status{color:var(--yellow);min-height:1.3em;font-size:.9rem;margin-top:8px}.players{display:grid;gap:8px;margin:14px 0}.player{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#171624;display:flex;justify-content:space-between;gap:10px}.pill{font-size:.75rem;color:var(--cyan)}.bigcode{font-size:2.2rem;letter-spacing:.18em;font-weight:1000;color:var(--cyan);text-align:center;margin:12px}.secret{background:#151421;border:1px solid var(--line);border-radius:16px;padding:22px;text-align:center;margin:18px 0}.role{font-weight:1000;font-size:clamp(1.8rem,7vw,2.6rem);margin:10px 0}.liar{color:var(--pink)}.innocent{color:var(--cyan)}.question{font-size:1.15rem;font-weight:800;line-height:1.4}.voteBtn{display:block;width:100%;text-align:left;background:#26233a;color:var(--text);border:1px solid #46405d;margin:7px 0}.voteBtn.selected{border-color:var(--pink);background:#45253d}.footer{text-align:center;color:#8e89a8;font-size:.78rem;padding:20px 5px;line-height:1.5}
+/* MYTHO CLUB — direction visuelle pop / social game, CSS uniquement */
+:root{
+  --bg:#100d19;--panel:#1b1728;--line:#3b3153;--text:#fffaff;--muted:#bdb3d0;
+  --pink:#ff4fa3;--cyan:#8fffe0;--yellow:#e8ff5a;
+  --acid:#d8ff54;--violet:#9a72ff;--hot:#ff6bce;
+}
+body{
+  background:
+    radial-gradient(ellipse at 4% 16%,rgba(255,79,163,.16),transparent 29%),
+    radial-gradient(ellipse at 96% 27%,rgba(154,114,255,.17),transparent 30%),
+    radial-gradient(ellipse at 50% -12%,#49316d 0,transparent 55%),
+    var(--bg);
+  background-attachment:fixed;
+}
+.app{width:min(720px,100%);padding:clamp(16px,3.5vw,26px) 0;animation:mytho-page-in .5s ease-out both}
+.top{font-size:.72rem;letter-spacing:.13em;gap:12px;align-items:center}
+.top span:last-child{border:1px solid rgba(216,255,84,.35);background:rgba(216,255,84,.08);color:var(--acid);padding:7px 10px;border-radius:999px;font-size:.65rem;white-space:nowrap}
+.top b{color:var(--acid)}
+header{margin:clamp(28px,7vw,48px) 0 28px;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;color:var(--acid);font-size:.7rem;letter-spacing:.13em;font-weight:950}
+.eyebrow::before{content:'✳';font-size:1rem;animation:mytho-spin 12s linear infinite}
+.logo{font-weight:1000;letter-spacing:-.075em;line-height:.88;font-size:clamp(2.8rem,11.5vw,5.6rem);margin:17px 0 16px;text-wrap:balance;transform:rotate(-1deg);text-shadow:0 8px 0 rgba(0,0,0,.14);animation:mytho-title-in .65s cubic-bezier(.2,.85,.2,1) both}
+.logo span{display:block;width:max-content;max-width:100%;margin:7px auto 0;padding:4px 12px 9px;border-radius:14px;background:var(--pink);color:#230d22;transform:rotate(1.2deg);box-shadow:5px 5px 0 var(--acid);}
+header p{max-width:390px;margin:20px auto 0;font-size:.96rem}
+.panel{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(34,27,49,.97),rgba(23,19,35,.98));border:1px solid #493b61;border-radius:25px;padding:clamp(18px,4.4vw,29px);margin:15px 0;box-shadow:0 14px 0 rgba(0,0,0,.14),0 22px 55px rgba(0,0,0,.16);transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.panel::before{content:'';position:absolute;top:0;left:24px;right:24px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--violet),var(--pink),var(--acid),transparent);opacity:.85;pointer-events:none}
+.panel:not(.hidden){animation:mytho-card-in .35s cubic-bezier(.2,.8,.2,1) both}
+.hidden{display:none!important}
+h2{font-size:clamp(1.35rem,5vw,1.8rem);letter-spacing:-.045em;line-height:1.05;margin:3px 0 9px}
+p{line-height:1.55}
+label{display:block;font-weight:850;font-size:.88rem;margin:17px 0 8px;color:#f7edff}
+input,select{width:100%;min-height:52px;border:1px solid #514363;background:#110e1c;color:var(--text);border-radius:15px;padding:14px 15px;outline:none;font:inherit;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+input::placeholder{color:#8e829f}
+input:focus,select:focus{border-color:var(--acid);box-shadow:0 0 0 3px rgba(216,255,84,.12);background:#171126}
+.btn{position:relative;isolation:isolate;overflow:hidden;border:1px solid transparent;border-radius:15px;padding:14px 16px;font:inherit;font-weight:950;letter-spacing:-.015em;min-height:51px;cursor:pointer;touch-action:manipulation;transition:transform .16s ease,filter .18s ease,box-shadow .18s ease,border-color .18s ease}
+.primary{background:var(--acid);color:#201b10;width:100%;margin-top:13px;box-shadow:0 5px 0 #9fbf2e,0 10px 24px rgba(216,255,84,.08)}
+.secondary{background:#2c233f;color:var(--text);border-color:#514365}
+.btn:disabled{opacity:.43;cursor:not-allowed;box-shadow:none}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1;min-width:min(100%,180px)}
+.note{background:rgba(12,10,20,.48);border:1px solid #3c304e;border-radius:16px;padding:13px 14px;margin-top:15px;color:var(--muted);font-size:.88rem;line-height:1.55}
+.status{color:var(--acid);min-height:1.3em;font-size:.9rem;margin-top:10px;font-weight:750}
+.players{display:grid;gap:9px;margin:16px 0}
+.player{padding:13px 14px;border:1px solid #443653;border-radius:15px;background:linear-gradient(110deg,#211a30,#191524);display:flex;justify-content:space-between;align-items:center;gap:10px;animation:mytho-player-in .3s both;transition:transform .17s ease,border-color .17s ease,background .17s ease}
+.player:nth-child(2){animation-delay:.025s}.player:nth-child(3){animation-delay:.05s}.player:nth-child(4){animation-delay:.075s}.player:nth-child(5){animation-delay:.1s}.player:nth-child(6){animation-delay:.125s}.player:nth-child(7){animation-delay:.15s}.player:nth-child(8){animation-delay:.175s}
+.pill{font-size:.72rem;font-weight:950;color:var(--acid);background:rgba(216,255,84,.08);border:1px solid rgba(216,255,84,.18);border-radius:999px;padding:5px 8px;white-space:nowrap}
+.bigcode{font-size:clamp(2rem,8vw,2.8rem);letter-spacing:.16em;font-weight:1000;color:var(--acid);text-align:center;margin:15px 0 18px;text-shadow:0 0 25px rgba(216,255,84,.16);animation:mytho-pop .4s cubic-bezier(.2,.8,.2,1) both}
+.secret{position:relative;background:linear-gradient(145deg,#282039,#171321);border:1px solid #59436d;border-radius:21px;padding:clamp(20px,5vw,28px);text-align:center;margin:19px 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 9px 0 rgba(0,0,0,.13);animation:mytho-card-in .4s ease-out both}
+.role{font-weight:1000;font-size:clamp(1.8rem,7.5vw,2.8rem);letter-spacing:-.055em;line-height:1.02;margin:13px 0;overflow-wrap:anywhere}
+.liar{color:var(--pink)}.innocent{color:var(--cyan)}
+.question{font-size:clamp(1.05rem,4vw,1.25rem);font-weight:850;line-height:1.4;overflow-wrap:anywhere}
+.voteBtn{display:block;width:100%;text-align:left;background:#251d35;color:var(--text);border:1px solid #483757;margin:8px 0;min-height:54px}
+.voteBtn.selected{border-color:var(--pink);background:linear-gradient(100deg,rgba(255,79,163,.2),rgba(154,114,255,.13));box-shadow:0 0 0 2px rgba(255,79,163,.12)}
+.footer{text-align:center;color:#9185a4;font-size:.76rem;padding:23px 5px;line-height:1.6}
+@media(hover:hover) and (pointer:fine){
+ .panel:not(.hidden):hover{border-color:#6a527e;box-shadow:0 16px 0 rgba(0,0,0,.12),0 28px 60px rgba(0,0,0,.2)}
+ .btn:not(:disabled):hover{transform:translateY(-2px);filter:brightness(1.04)}
+ .primary:not(:disabled):hover{box-shadow:0 7px 0 #9fbf2e,0 15px 30px rgba(216,255,84,.14)}
+ .btn:not(:disabled):active{transform:translateY(2px) scale(.99)}
+ .player:hover{transform:translateX(3px);border-color:#71577f}
+ .voteBtn:not(:disabled):hover{border-color:var(--pink);background:#35243f}
+}
+@keyframes mytho-page-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes mytho-title-in{from{opacity:0;transform:translateY(12px) rotate(-1deg) scale(.98)}to{opacity:1;transform:translateY(0) rotate(-1deg) scale(1)}}
+@keyframes mytho-card-in{from{opacity:0;transform:translateY(7px) scale(.994)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes mytho-player-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@keyframes mytho-pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes mytho-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media(max-width:420px){body{padding-left:12px;padding-right:12px}.top{font-size:.64rem}.panel{border-radius:21px}.row{gap:8px}.row>*{min-width:100%}.logo{font-size:clamp(2.55rem,11vw,3.4rem)}}
+
 </style></head><body><main class="app"><div class="top"><span>MYTHO<b> CLUB</b></span><span>EN LIGNE · BÊTA</span></div><header><div class="eyebrow">Le jeu de bluff entre amis</div><div class="logo">QUI EST LE <span>MYTHO ?</span></div><p class="muted">Crée un salon, partage le code et joue chacun sur ton téléphone.</p></header>
 <section id="home" class="panel"><h2>Rejoindre une partie</h2><label for="name">Ton pseudo</label><input id="name" maxlength="22" placeholder="Ex. Alex" autocomplete="nickname"><label for="code">Code du salon (si tu rejoins)</label><input id="code" maxlength="5" placeholder="Ex. K7P2Q" autocapitalize="characters" autocomplete="off"><div class="row"><button id="create" class="btn primary">Créer un salon</button><button id="join" class="btn secondary">Rejoindre</button></div><div id="homeStatus" class="status" role="status"></div><div class="note">De 3 à 8 joueurs. Le créateur démarre quand tout le monde a rejoint. Chaque joueur voit uniquement son propre rôle dans l’interface.</div></section>
 <section id="lobby" class="panel hidden"><h2>Salon en attente</h2><p class="muted">Envoie ce code à tes amis pour qu’ils rejoignent la partie.</p><div id="roomCode" class="bigcode"></div><div id="categoryPickerWrap"><label for="categoryPicker">Catégorie de la prochaine manche</label><select id="categoryPicker"><option value="all">🎲 Mélange de tout</option><option value="food">🍔 Nourriture</option><option value="rap">🎵 Musique & rap</option><option value="school">🎒 École</option><option value="sport">⚽ Sport</option><option value="daily">📱 Vie quotidienne</option><option value="fun">😂 Drôle & absurde</option></select><p class="muted" id="categoryStatus">Le créateur choisit la catégorie.</p></div><button id="copy" class="btn secondary" style="width:100%">Copier le lien d’invitation</button><div id="lobbyPlayers" class="players"></div><button id="start" class="btn primary hidden">Lancer la manche</button><div id="lobbyStatus" class="status" role="status"></div><button id="leave" class="btn secondary" style="width:100%;margin-top:8px">Quitter le salon</button></section>
