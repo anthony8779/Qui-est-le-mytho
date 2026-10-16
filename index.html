@@ -72,13 +72,80 @@ input:focus,select:focus{border-color:var(--acid);box-shadow:0 0 0 3px rgba(216,
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 @media(max-width:420px){body{padding-left:12px;padding-right:12px}.top{font-size:.64rem}.panel{border-radius:21px}.row{gap:8px}.row>*{min-width:100%}.logo{font-size:clamp(2.55rem,11vw,3.4rem)}}
 
+
+/* --- Grande révélation du mytho --- */
+#result{isolation:isolate}
+#result .reveal-overlay{
+  position:absolute;z-index:20;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;gap:clamp(12px,3vw,22px);
+  padding:24px;background:
+    radial-gradient(circle at 50% 45%,rgba(202,255,54,.22),transparent 36%),
+    radial-gradient(circle at 20% 20%,rgba(255,54,164,.28),transparent 38%),
+    linear-gradient(145deg,#171326 0%,#28143b 55%,#11101b 100%);
+  animation:verdict-curtain 3.15s cubic-bezier(.7,0,.25,1) forwards;
+  pointer-events:none;overflow:hidden;
+}
+#result .reveal-overlay::before,
+#result .reveal-overlay::after{
+  content:"";position:absolute;inset:-50%;pointer-events:none;
+  background:repeating-conic-gradient(from 0deg,rgba(202,255,54,.12) 0deg 1deg,transparent 1deg 15deg);
+  animation:verdict-spin 12s linear infinite;
+}
+#result .reveal-overlay::after{
+  inset:0;background:radial-gradient(circle at center,transparent 10%,rgba(0,0,0,.4) 100%);
+  animation:none;
+}
+.reveal-kicker,.reveal-big,.reveal-count{position:relative;z-index:1}
+.reveal-kicker{
+  font-size:clamp(.72rem,2vw,.95rem);font-weight:950;letter-spacing:.25em;
+  color:#caff36;text-transform:uppercase;animation:verdict-kicker .55s .12s both;
+}
+.reveal-big{
+  font-size:clamp(2.6rem,10vw,5.5rem);font-weight:1000;line-height:.88;letter-spacing:-.075em;
+  color:#fff;text-shadow:0 8px 0 rgba(0,0,0,.2),0 0 45px rgba(255,54,164,.3);
+  animation:verdict-title .75s .18s cubic-bezier(.16,1,.3,1) both;
+}
+.reveal-big span{
+  color:#caff36;text-shadow:0 0 30px rgba(202,255,54,.25);
+}
+.reveal-count{
+  padding:9px 15px;border:1px solid rgba(202,255,54,.45);border-radius:999px;
+  background:rgba(202,255,54,.08);color:#caff36;font-weight:950;letter-spacing:.2em;
+  animation:verdict-count .8s .65s both;
+}
+#result .secret{position:relative;overflow:hidden}
+#result #winner{
+  animation:liar-reveal .85s 2.25s cubic-bezier(.16,1,.3,1) both;
+  transform-origin:center;
+}
+#result #resultTitle{animation:result-title-in .6s 2.35s both}
+#result #resultDetails{animation:result-title-in .6s 2.55s both}
+#result .note{animation:result-card-in .55s 2.65s both}
+#result .note:nth-of-type(3){animation-delay:2.8s}
+#result #rematch,#result #exitResult{animation:result-card-in .5s 2.95s both}
+@keyframes verdict-curtain{
+  0%,70%{opacity:1;visibility:visible;transform:scale(1)}
+  100%{opacity:0;visibility:hidden;transform:scale(1.035)}
+}
+@keyframes verdict-spin{to{transform:rotate(360deg)}}
+@keyframes verdict-kicker{from{opacity:0;letter-spacing:.5em;transform:translateY(-12px)}to{opacity:1;letter-spacing:.25em;transform:translateY(0)}}
+@keyframes verdict-title{0%{opacity:0;transform:scale(.65) rotate(-4deg);filter:blur(8px)}65%{opacity:1;transform:scale(1.07) rotate(1deg);filter:blur(0)}100%{transform:scale(1) rotate(0)}}
+@keyframes verdict-count{0%{opacity:0;transform:scale(.7)}30%{opacity:1;transform:scale(1.12)}55%{transform:scale(1)}100%{opacity:1;transform:scale(1)}}
+@keyframes liar-reveal{0%{opacity:0;transform:translateY(18px) scale(.65) rotate(-2deg);filter:blur(8px)}70%{opacity:1;transform:translateY(-3px) scale(1.06);filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes result-title-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes result-card-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){
+  #result .reveal-overlay{animation-duration:.01ms;animation-delay:0s}
+  #result #winner,#result #resultTitle,#result #resultDetails,#result .note,#result #rematch,#result #exitResult{animation-delay:0s;animation-duration:.01ms}
+}
+
 </style></head><body><main class="app"><div class="top"><span>MYTHO<b> CLUB</b></span><span>EN LIGNE · BÊTA</span></div><header><div class="eyebrow">Le jeu de bluff entre amis</div><div class="logo">QUI EST LE <span>MYTHO ?</span></div><p class="muted">Crée un salon, partage le code et joue chacun sur ton téléphone.</p></header>
 <section id="home" class="panel"><h2>Rejoindre une partie</h2><label for="name">Ton pseudo</label><input id="name" maxlength="22" placeholder="Ex. Alex" autocomplete="nickname"><label for="code">Code du salon (si tu rejoins)</label><input id="code" maxlength="5" placeholder="Ex. K7P2Q" autocapitalize="characters" autocomplete="off"><div class="row"><button id="create" class="btn primary">Créer un salon</button><button id="join" class="btn secondary">Rejoindre</button></div><div id="homeStatus" class="status" role="status"></div><div class="note">De 3 à 8 joueurs. Le créateur démarre quand tout le monde a rejoint. Chaque joueur voit uniquement son propre rôle dans l’interface.</div></section>
 <section id="lobby" class="panel hidden"><h2>Salon en attente</h2><p class="muted">Envoie ce code à tes amis pour qu’ils rejoignent la partie.</p><div id="roomCode" class="bigcode"></div><div id="categoryPickerWrap"><label for="categoryPicker">Catégorie de la prochaine manche</label><select id="categoryPicker"><option value="all">🎲 Mélange de tout</option><option value="food">🍔 Nourriture</option><option value="rap">🎵 Musique & rap</option><option value="school">🎒 École</option><option value="sport">⚽ Sport</option><option value="daily">📱 Vie quotidienne</option><option value="fun">😂 Drôle & absurde</option></select><p class="muted" id="categoryStatus">Le créateur choisit la catégorie.</p></div><button id="copy" class="btn secondary" style="width:100%">Copier le lien d’invitation</button><div id="lobbyPlayers" class="players"></div><button id="start" class="btn primary hidden">Lancer la manche</button><div id="lobbyStatus" class="status" role="status"></div><button id="leave" class="btn secondary" style="width:100%;margin-top:8px">Quitter le salon</button></section>
 <section id="roleScreen" class="panel hidden"><div class="eyebrow">Manche en cours</div><h2>Ton rôle secret</h2><p class="muted">Ne montre pas ton écran aux autres.</p><div class="secret"><div id="roleText" class="role"></div><div class="muted">Ta question</div><p id="myQuestion" class="question"></p></div><button id="ready" class="btn primary">J’ai mémorisé mon rôle</button><div class="note">Quand tout le monde a lu son rôle, discutez à voix haute puis le créateur ouvre le vote.</div></section>
 <section id="discussion" class="panel hidden"><div class="eyebrow">Discussion</div><h2>À vous de parler !</h2><p class="muted">Chacun répond à sa question à voix haute. Le mytho improvise et essaie de se fondre dans le groupe.</p><div class="secret"><div class="muted">QUESTION DES INNOCENTS</div><p id="publicQuestion" class="question"></p></div><p id="discussionStatus" class="muted"></p><button id="openVote" class="btn primary hidden">Ouvrir le vote</button><div class="note">Les rôles sont privés dans la base de données. Ne trichez pas en modifiant les données du navigateur.</div></section>
 <section id="vote" class="panel hidden"><div class="eyebrow">Vote</div><h2>Qui est le mytho ?</h2><p class="muted">Choisis la personne que tu soupçonnes. Ton vote est enregistré une seule fois.</p><div id="voteChoices"></div><button id="submitVote" class="btn primary" disabled>Valider mon vote</button><p id="voteStatus" class="status" role="status"></p><button id="reveal" class="btn secondary hidden" style="width:100%;margin-top:8px">Révéler les résultats (créateur)</button></section>
-<section id="result" class="panel hidden"><div class="eyebrow">Fin de manche</div><h2 id="resultTitle">Révélation !</h2><div class="secret"><div class="muted">LE MYTHO ÉTAIT</div><div id="winner" class="role liar"></div><p id="resultDetails"></p></div><div class="note"><b>Classement des joueurs</b><div id="scoreboard" class="players"></div><p class="muted">+2 points pour un innocent qui vote juste. +2 points pour le mytho s’il n’est pas démasqué.</p></div><div class="note"><b>Question des innocents :</b><p id="qGood"></p><b>Question du mytho :</b><p id="qLiar"></p></div><button id="rematch" class="btn primary">Rejouer avec le même groupe</button><button id="exitResult" class="btn secondary" style="width:100%;margin-top:8px">Retour à l’accueil</button></section>
+<section id="result" class="panel hidden"><div class="reveal-overlay" aria-hidden="true"><div class="reveal-kicker">LE VERDICT EST TOMBÉ</div><div class="reveal-big">QUI EST<br><span>LE MYTHO ?</span></div><div class="reveal-count">3 · 2 · 1</div></div><div class="eyebrow">Fin de manche</div><h2 id="resultTitle">Révélation !</h2><div class="secret"><div class="muted">LE MYTHO ÉTAIT</div><div id="winner" class="role liar"></div><p id="resultDetails"></p></div><div class="note"><b>Classement des joueurs</b><div id="scoreboard" class="players"></div><p class="muted">+2 points pour un innocent qui vote juste. +2 points pour le mytho s’il n’est pas démasqué.</p></div><div class="note"><b>Question des innocents :</b><p id="qGood"></p><b>Question du mytho :</b><p id="qLiar"></p></div><button id="rematch" class="btn primary">Rejouer avec le même groupe</button><button id="exitResult" class="btn secondary" style="width:100%;margin-top:8px">Retour à l’accueil</button></section>
 <footer class="footer">QUI EST LE MYTHO ? · Prototype en ligne<br>Ne partage pas d’informations personnelles dans ton pseudo.</footer></main>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
